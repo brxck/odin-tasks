@@ -1,10 +1,10 @@
-import { createTaskList, lists } from "./todo"
+import { createProject, deleteProject, projects } from "./todo"
 
-lists.list0.createTask({
+projects.project0.createTask({
   name: "Create a task",
   description: "",
   dueDate: "5/5/2019",
   priority: 5
 })
 
-console.log(lists)
+console.log(projects)

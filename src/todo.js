@@ -1,6 +1,6 @@
-const createTaskList = ({ name, description }) => {
+const createProject = ({ name, description }) => {
   let newList = {
-    id: "list" + nextListId,
+    id: "project" + nextListId,
     name: name,
     description: description,
     tasks: {},
@@ -13,10 +13,10 @@ const createTaskList = ({ name, description }) => {
         description: description,
         dueDate: dueDate,
         priority: priority,
-        done: false,
+        completed: false,
 
-        toggleDone () {
-          this.done = !this.done
+        toggleCompleted () {
+          this.completed = !this.completed
         }
       }
       this.tasks[newTask.id] = newTask
@@ -27,13 +27,17 @@ const createTaskList = ({ name, description }) => {
       delete this.tasks[id]
     }
   }
-  lists[newList.id] = newList
+  projects[newList.id] = newList
   nextListId += 1
 }
 
-const lists = {}
+const deleteProject = (id) => {
+  delete projects[id]
+}
+
+const projects = {}
 let nextListId = 0
 
-createTaskList({ name: "Get started", description: "Add some tasks here, or create a new list." })
+createProject({ name: "Get started", description: "Add some tasks here, or create a new list." })
 
-export { createTaskList, lists }
+export { createProject, deleteProject, projects }

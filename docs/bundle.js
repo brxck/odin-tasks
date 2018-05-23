@@ -79,7 +79,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo */ \"./src/todo.js\");\n\n\n_todo__WEBPACK_IMPORTED_MODULE_0__[\"lists\"].list0.createTask({\n  name: \"Create a task\",\n  description: \"\",\n  dueDate: \"5/5/2019\",\n  priority: 5\n})\n\nconsole.log(_todo__WEBPACK_IMPORTED_MODULE_0__[\"lists\"])\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo */ \"./src/todo.js\");\n\n\n_todo__WEBPACK_IMPORTED_MODULE_0__[\"projects\"].project0.createTask({\n  name: \"Create a task\",\n  description: \"\",\n  dueDate: \"5/5/2019\",\n  priority: 5\n})\n\nconsole.log(_todo__WEBPACK_IMPORTED_MODULE_0__[\"projects\"])\n\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
@@ -87,11 +87,11 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _tod
 /*!*********************!*\
   !*** ./src/todo.js ***!
   \*********************/
-/*! exports provided: createTaskList, lists */
+/*! exports provided: createProject, deleteProject, projects */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"createTaskList\", function() { return createTaskList; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"lists\", function() { return lists; });\nconst createTaskList = ({ name, description }) => {\n  let newList = {\n    id: \"list\" + nextListId,\n    name: name,\n    description: description,\n    tasks: {},\n    nextTaskId: 0,\n\n    createTask ({ name, description, dueDate, priority }) {\n      let newTask = {\n        id: \"task\" + this.nextTaskId,\n        name: name,\n        description: description,\n        dueDate: dueDate,\n        priority: priority,\n        done: false,\n\n        toggleDone () {\n          this.done = !this.done\n        }\n      }\n      this.tasks[newTask.id] = newTask\n      this.nextTaskId += 1\n    },\n\n    deleteTask (id) {\n      delete this.tasks[id]\n    }\n  }\n  lists[newList.id] = newList\n  nextListId += 1\n}\n\nconst lists = {}\nlet nextListId = 0\n\ncreateTaskList({ name: \"Get started\", description: \"Add some tasks here, or create a new list.\" })\n\n\n\n\n//# sourceURL=webpack:///./src/todo.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"createProject\", function() { return createProject; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"deleteProject\", function() { return deleteProject; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"projects\", function() { return projects; });\nconst createProject = ({ name, description }) => {\n  let newList = {\n    id: \"project\" + nextListId,\n    name: name,\n    description: description,\n    tasks: {},\n    nextTaskId: 0,\n\n    createTask ({ name, description, dueDate, priority }) {\n      let newTask = {\n        id: \"task\" + this.nextTaskId,\n        name: name,\n        description: description,\n        dueDate: dueDate,\n        priority: priority,\n        completed: false,\n\n        toggleCompleted () {\n          this.completed = !this.completed\n        }\n      }\n      this.tasks[newTask.id] = newTask\n      this.nextTaskId += 1\n    },\n\n    deleteTask (id) {\n      delete this.tasks[id]\n    }\n  }\n  projects[newList.id] = newList\n  nextListId += 1\n}\n\nconst deleteProject = (id) => {\n  delete projects[id]\n}\n\nconst projects = {}\nlet nextListId = 0\n\ncreateProject({ name: \"Get started\", description: \"Add some tasks here, or create a new list.\" })\n\n\n\n\n//# sourceURL=webpack:///./src/todo.js?");
 
 /***/ })
 
