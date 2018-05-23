@@ -1,29 +1,29 @@
-const todo = () => {
-  const lists = []
+const createTaskList = ({ name, description }) => {
+  let newTaskList = {
+    name: name,
+    description: description,
+    tasks: [],
 
-  const createTaskList = ({ name, description }) => {
-    let newTaskList = {
-      name: name,
-      description: description,
-      tasks: [],
+    createTask ({ name, description, dueDate, priority }) {
+      let newTask = {
+        name: name,
+        description: description,
+        dueDate: dueDate,
+        priority: priority,
+        done: false,
 
-      createTask ({ name, description, dueDate, priority, done }) {
-        let newTask = {
-          name: name,
-          description: description,
-          dueDate: dueDate,
-          priority: priority,
-          done: done,
-
-          toggleDone () {
-            this.done = !this.done
-          }
+        toggleDone () {
+          this.done = !this.done
         }
-
-        this.tasks.push(newTask)
       }
+      this.tasks.push(newTask)
     }
-
-    lists.push(newTaskList)
   }
+  lists.push(newTaskList)
 }
+
+const lists = []
+
+createTaskList({ name: "Get started", description: "Add some tasks here, or create a new list." })
+
+export { createTaskList, lists }

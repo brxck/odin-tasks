@@ -75,10 +75,23 @@
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("\n\n//# sourceURL=webpack:///./src/index.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo */ \"./src/todo.js\");\n\n\nconsole.log(_todo__WEBPACK_IMPORTED_MODULE_0__[\"lists\"])\n\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/todo.js":
+/*!*********************!*\
+  !*** ./src/todo.js ***!
+  \*********************/
+/*! exports provided: createTaskList, lists */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"createTaskList\", function() { return createTaskList; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"lists\", function() { return lists; });\nconst createTaskList = ({ name, description }) => {\n  let newTaskList = {\n    name: name,\n    description: description,\n    tasks: [],\n\n    createTask ({ name, description, dueDate, priority }) {\n      let newTask = {\n        name: name,\n        description: description,\n        dueDate: dueDate,\n        priority: priority,\n        done: false,\n\n        toggleDone () {\n          this.done = !this.done\n        }\n      }\n      this.tasks.push(newTask)\n    }\n  }\n  lists.push(newTaskList)\n}\n\nconst lists = []\n\ncreateTaskList({ name: \"Get started\", description: \"Add some tasks here, or create a new list.\" })\n\n\n\n\n//# sourceURL=webpack:///./src/todo.js?");
 
 /***/ })
 
