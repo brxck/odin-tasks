@@ -1,4 +1,5 @@
 import { createProject, deleteProject, projects } from "./todo"
+import "./index.scss"
 
 projects.project0.createTask({
   name: "Create a task",

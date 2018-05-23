@@ -1,6 +1,7 @@
 var path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const devMode = process.env.NODE_ENV !== "production"
 
 module.exports = {
   mode: "development",
@@ -20,7 +21,7 @@ module.exports = {
         test: /\.scss$/,
         use: [
           // fallback to style-loader in development
-          process.env.NODE_ENV !== "production" ? "style-loader" : MiniCssExtractPlugin.loader,
+          devMode ? "style-loader" : MiniCssExtractPlugin.loader,
           "css-loader",
           "sass-loader"
         ]}
