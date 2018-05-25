@@ -34,26 +34,30 @@ function createTask ({ name, description, dueDate, priority }) {
   this.nextTaskId += 1
 }
 
-const createProject = (name) => {
+function createProject (name) {
   let newProject = {
-    id: "project" + nextListId,
+    id: "project" + this.nextProjectId,
     name: name,
     boards: [],
     nextBoardId: 0,
     createBoard
   }
-  projects.list.push(newProject)
-  projects[newProject.id] = newProject
-  nextListId += 1
+  this.list.push(newProject)
+  this[newProject.id] = newProject
+  this.nextProjectId += 1
 }
 
 const deleteProject = (id) => {
   delete projects[id]
 }
 
-const projects = { list: [] }
-let nextListId = 0
+const projects = {
+  createProject,
+  deleteProject,
+  list: [],
+  nextProjectId: 0
+}
 
-createProject("Welcome")
+projects.createProject("Welcome")
 
 export { createProject, deleteProject, projects }
