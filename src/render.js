@@ -1,9 +1,19 @@
-const listView = document.getElementById("listView")
+const view = document.getElementById("view")
 
-const render = (elements) => {
-  for (let i in elements) {
-    listView.append(elements[i])
-  }
+const render = (elements, partial = false) => {
+  if (partial) view.innerHtml = ""
+  elements.forEach((element) => {
+    view.appendChild(element)
+  })
+}
+
+const renderProjects = (projects) => {
+  const elements = []
+  projects.list.forEach((project) => {
+    let projectElement = createProjectElement(project)
+    elements.push(projectElement)
+  })
+  render(elements)
 }
 
 const createProjectElement = (project) => {
@@ -17,7 +27,7 @@ const createProjectElement = (project) => {
 
   const header = createElement({
     tag: "div",
-    className: "card-header"
+    className: "card-header clickable"
   })
 
   const title = createElement({
@@ -62,4 +72,4 @@ const createElement = (properties) => {
   return element
 }
 
-export default createProjectElement
+export { createProjectElement, renderProjects }
