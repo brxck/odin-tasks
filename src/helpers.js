@@ -10,11 +10,11 @@ const createElement = (properties) => {
 const priorityClass = (priority) => {
   switch (priority) {
     case 0:
-      return "is-info"
+      return ""
     case 1:
-      return "is-success"
+      return "is-info"
     case 2:
-      return "is-warning"
+      return "is-success"
     case 3:
       return "is-danger"
   }
