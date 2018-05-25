@@ -1,4 +1,5 @@
 import { createElement, priorityClass } from "./helpers"
+import { renderModalCard } from "./modal"
 
 const composeTasks = (board) => {
   const fragment = document.createDocumentFragment()
@@ -19,6 +20,8 @@ const composeTasks = (board) => {
     media.appendChild(content)
     media.appendChild(icons)
     fragment.appendChild(media)
+
+    media.addEventListener("click", () => renderModalCard(task))
   })
 
   return fragment
