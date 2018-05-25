@@ -1,27 +1,39 @@
-const createProject = ({ name, description }) => {
+const createProject = (name) => {
   let newProject = {
     id: "project" + nextListId,
     name: name,
-    description: description,
-    tasks: { list: [] },
-    nextTaskId: 0,
+    boards: [],
+    nextBoardId: 0,
 
-    createTask ({ name, description, dueDate, priority }) {
-      let newTask = {
-        id: "task" + this.nextTaskId,
+    createBoard (name) {
+      const newBoard = {
         name: name,
-        description: description,
-        dueDate: dueDate,
-        priority: priority,
-        completed: false,
+        id: "board" + this.nextBoardId,
+        nextTaskId: 0,
+        tasks: [],
 
-        toggleCompleted () {
-          this.completed = !this.completed
+        createTask ({ name, description, dueDate, priority }) {
+          let newTask = {
+            id: "task" + this.nextTaskId,
+            name: name,
+            board: this.id,
+            description: description,
+            dueDate: dueDate,
+            priority: priority,
+            completed: false,
+
+            toggleCompleted () {
+              this.completed = !this.completed
+            }
+          }
+          this.tasks.push(newTask)
+          this[newTask.id] = newTask
+          this.nextTaskId += 1
         }
       }
-      this.tasks.list.push(newTask)
-      this.tasks[newTask.id] = newTask
-      this.nextTaskId += 1
+      this.boards.push(newBoard)
+      this[newBoard.id] = newBoard
+      this.nextBoardId += 1
     },
 
     deleteTask (id) {
@@ -40,6 +52,6 @@ const deleteProject = (id) => {
 const projects = { list: [] }
 let nextListId = 0
 
-createProject({ name: "Get started", description: "Add some tasks here, or create a new list." })
+createProject("Welcome")
 
 export { createProject, deleteProject, projects }
