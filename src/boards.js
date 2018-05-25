@@ -1,4 +1,5 @@
 import { createElement } from "./helpers"
+import composeTasks from "./tasks"
 
 const boardView = document.getElementById("board-view")
 const projectTitle = document.getElementById("project-title")
@@ -12,7 +13,7 @@ const renderBoards = (project) => {
 }
 
 const composeBoard = (board) => {
-  const column = createElement({ tag: "div", className: "column is-narrow" })
+  const column = createElement({ tag: "div", className: "column" })
 
   const card = createElement({
     tag: "article",
@@ -33,7 +34,9 @@ const composeBoard = (board) => {
 
   const content = createElement({
     tag: "p",
-    className: "card-content"
+    className: "card-content",
+    id: board.id + "-tasks",
+    child: composeTasks(board)
   })
 
   // Use for future icons
