@@ -7,22 +7,24 @@ const renderModalCard = (task) => {
     className: "modal-background",
     eventListener: ["click", clearModal]
   })
-  const modalCard = createElement({ tag: "article", className: "modal-card" })
-  const modalCardHead = createElement({ tag: "header", className: "modal-card-head" })
-  const modalCardTitle = createElement({
+  const close = createElement({ tag: "button", className: "modal-close is-large" })
+  const card = createElement({ tag: "article", className: "card" })
+  const cardHead = createElement({ tag: "header", className: "card-header" })
+  const cardTitle = createElement({
     tag: "p",
-    className: "modal-card-title",
+    className: "card-header-title",
     content: task.name
   })
-  const modalCardBody = createElement({ tag: "div", className: "modal-card-body" })
-  const modalCardFoot = createElement({ tag: "footer", className: "modal-card-foot" })
+  const cardBody = createElement({ tag: "div", className: "card-content" })
+  const cardFoot = createElement({ tag: "footer", className: "card-footer" })
 
   modal.appendChild(background)
-  modal.appendChild(modalCard)
-  modalCard.appendChild(modalCardHead)
-  modalCard.appendChild(modalCardBody)
-  modalCard.appendChild(modalCardFoot)
-  modalCardHead.appendChild(modalCardTitle)
+  modal.appendChild(card)
+  modal.appendChild(close)
+  card.appendChild(cardHead)
+  card.appendChild(cardBody)
+  card.appendChild(cardFoot)
+  cardHead.appendChild(cardTitle)
 
   document.body.appendChild(modal)
 }

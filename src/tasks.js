@@ -5,7 +5,11 @@ const composeTasks = (board) => {
   const fragment = document.createDocumentFragment()
 
   board.tasks.forEach((task) => {
-    const media = createElement({ tag: "article", className: "media clickable" })
+    const media = createElement({
+      tag: "article",
+      className: "media clickable",
+      eventListener: ["click", () => renderModalCard(task)]
+    })
     const left = createElement({ tag: "div", className: "media-left" })
     const content = createElement({ tag: "p", className: "media-content", content: task.name })
     const icons = createElement({ tag: "div", className: "media-right" })
@@ -20,8 +24,6 @@ const composeTasks = (board) => {
     media.appendChild(content)
     media.appendChild(icons)
     fragment.appendChild(media)
-
-    media.addEventListener("click", () => renderModalCard(task))
   })
 
   return fragment
