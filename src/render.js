@@ -32,9 +32,23 @@ const createProjectElement = (project) => {
     content: project.description
   })
 
+  // Use for future icons
+  const iconLink = createElement({
+    tag: "a",
+    className: "card-header-icon"
+  })
+
+  const icon = createElement({
+    tag: "span",
+    className: "icon",
+    content: `<i class="">${""}</i>`
+  })
+
   fragment.appendChild(card)
   card.appendChild(header)
   header.appendChild(title)
+  iconLink.appendChild(icon)
+  header.appendChild(iconLink)
   card.appendChild(content)
 
   return fragment
