@@ -2,11 +2,14 @@
 
 import { createProject, deleteProject, projects } from "./todo"
 import { renderMenu, renderProjects } from "./menu"
+import renderBoards from "./boards"
 import "./index.scss"
 
 console.log(projects)
 
 projects.project0.createBoard("Get started")
+projects.project0.createBoard("Hello world")
+projects.project0.createBoard("Top of morning")
 
 // projects.project0.board0.createTask({
 //   name: "Create a task",
@@ -17,4 +20,4 @@ projects.project0.createBoard("Get started")
 
 renderMenu()
 renderProjects(projects)
-
+renderBoards(projects.project0)

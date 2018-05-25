@@ -1,10 +1,23 @@
-const composeTask = (task) => {
-  const fragment = document.createDocumentFragment()
+import { createElement } from "./helpers"
+
+const boardView = document.getElementById("board-view")
+const projectTitle = document.getElementById("project-title")
+
+const renderBoards = (project) => {
+  project.boards.forEach((board) => {
+    let newBoard = composeBoard(board)
+    boardView.appendChild(newBoard)
+  })
+  projectTitle.textContent = project.name
+}
+
+const composeBoard = (board) => {
+  const column = createElement({ tag: "div", className: "column is-narrow" })
 
   const card = createElement({
     tag: "article",
     className: "card",
-    id: project.id
+    id: board.id
   })
 
   const header = createElement({
@@ -15,13 +28,12 @@ const composeTask = (task) => {
   const title = createElement({
     tag: "p",
     className: "card-header-title",
-    content: project.name
+    content: board.name
   })
 
   const content = createElement({
     tag: "p",
-    className: "card-content",
-    content: project.description
+    className: "card-content"
   })
 
   // Use for future icons
@@ -36,12 +48,14 @@ const composeTask = (task) => {
     content: `<i class="">${""}</i>`
   })
 
-  fragment.appendChild(card)
+  column.appendChild(card)
   card.appendChild(header)
   header.appendChild(title)
   iconLink.appendChild(icon)
   header.appendChild(iconLink)
   card.appendChild(content)
 
-  return fragment
+  return column
 }
+
+export default renderBoards
