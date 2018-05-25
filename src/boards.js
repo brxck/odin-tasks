@@ -5,6 +5,7 @@ const boardView = document.getElementById("board-view")
 const projectTitle = document.getElementById("project-title")
 
 const renderBoards = (project) => {
+  boardView.innerHTML = ""
   project.boards.forEach((board) => {
     let newBoard = composeBoard(board)
     boardView.appendChild(newBoard)
@@ -61,4 +62,4 @@ const composeBoard = (board) => {
   return column
 }
 
-export default renderBoards
+export { renderBoards }

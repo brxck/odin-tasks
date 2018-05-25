@@ -1,4 +1,5 @@
 import { createElement } from "./helpers"
+import { renderBoards } from "./boards"
 
 const menuView = document.getElementById("menu-view")
 
@@ -21,8 +22,11 @@ const renderProjects = (projects) => {
 const composeProjects = (projects) => {
   const elements = []
   projects.list.forEach((project) => {
-    let projectElement = createElement({tag: "li", content: `<a>${project.name}</a>`})
-    // projectElement.addEventListener(() => {    })
+    let projectElement = createElement({
+      tag: "li",
+      content: `<a>${project.name}</a>`,
+      eventListener: ["click", () => renderBoards(project)]
+    })
     elements.push(projectElement)
   })
   return elements
