@@ -1,9 +1,9 @@
 const createProject = ({ name, description }) => {
-  let newList = {
+  let newProject = {
     id: "project" + nextListId,
     name: name,
     description: description,
-    tasks: {},
+    tasks: { list: [] },
     nextTaskId: 0,
 
     createTask ({ name, description, dueDate, priority }) {
@@ -19,6 +19,7 @@ const createProject = ({ name, description }) => {
           this.completed = !this.completed
         }
       }
+      this.tasks.list.push(newTask)
       this.tasks[newTask.id] = newTask
       this.nextTaskId += 1
     },
@@ -27,7 +28,8 @@ const createProject = ({ name, description }) => {
       delete this.tasks[id]
     }
   }
-  projects[newList.id] = newList
+  projects.list.push(newProject)
+  projects[newProject.id] = newProject
   nextListId += 1
 }
 
@@ -35,7 +37,7 @@ const deleteProject = (id) => {
   delete projects[id]
 }
 
-const projects = {}
+const projects = { list: [] }
 let nextListId = 0
 
 createProject({ name: "Get started", description: "Add some tasks here, or create a new list." })
