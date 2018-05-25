@@ -1,9 +1,12 @@
-const createElement = (properties) => {
-  let element = document.createElement(properties.tag)
-  if (properties.className) { element.className = properties.className }
-  if (properties.id) { element.id = properties.id }
-  if (properties.content) { element.innerHTML = properties.content }
-  if (properties.child) { element.appendChild(properties.child) }
+const createElement = ({ tag, className, id, content, child, eventListener }) => {
+  let element = document.createElement(tag)
+  if (className) { element.className = className }
+  if (id) { element.id = id }
+  if (content) { element.innerHTML = content }
+  if (child) { element.appendChild(child) }
+  if (eventListener) {
+    element.addEventListener(eventListener[0], eventListener[1])
+  }
   return element
 }
 
