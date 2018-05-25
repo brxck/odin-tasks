@@ -15,7 +15,7 @@ function createBoard (name) {
   this.nextBoardId += 1
 }
 
-function createTask ({ name, description, dueDate, priority }) {
+function createTask ({ name, description = "", dueDate, priority }) {
   let newTask = {
     id: "task" + this.nextTaskId,
     name: name,
@@ -57,7 +57,5 @@ const projects = {
   list: [],
   nextProjectId: 0
 }
-
-projects.createProject("Welcome")
 
 export { createProject, deleteProject, projects }
