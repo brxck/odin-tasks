@@ -4,7 +4,7 @@ const composeTasks = (board) => {
   const fragment = document.createDocumentFragment()
 
   board.tasks.forEach((task) => {
-    const media = createElement({ tag: "article", className: "media" })
+    const media = createElement({ tag: "article", className: "media clickable" })
     const left = createElement({ tag: "div", className: "media-left" })
     const content = createElement({ tag: "p", className: "media-content", content: task.name })
     const icons = createElement({ tag: "div", className: "media-right" })

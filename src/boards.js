@@ -23,7 +23,7 @@ const composeBoard = (board) => {
 
   const header = createElement({
     tag: "div",
-    className: "card-header clickable"
+    className: "card-header"
   })
 
   const title = createElement({
