@@ -1,6 +1,6 @@
 import { createElement } from "./helpers"
 
-const menuColumn = document.getElementById("menu-column")
+const menuView = document.getElementById("menu-view")
 
 const renderMenu = () => {
   const menu = createElement({tag: "aside", className: "menu"})
@@ -9,7 +9,7 @@ const renderMenu = () => {
 
   menu.appendChild(label)
   menu.appendChild(list)
-  menuColumn.appendChild(menu)
+  menuView.appendChild(menu)
 }
 
 const renderProjects = (projects) => {
