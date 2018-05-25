@@ -1,3 +1,6 @@
+// Lexical scoping of 'this' in arrow functions causes problems here. See:
+// https://derickbailey.com/2015/09/28/do-es6-arrow-functions-really-solve-this-in-javascript/
+
 function createBoard (name) {
   const newBoard = {
     name: name,
