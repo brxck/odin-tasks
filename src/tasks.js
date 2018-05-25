@@ -1,12 +1,5 @@
 import { createElement, priorityClass } from "./helpers"
 
-const renderTasks = (board) => {
-  const boardColumn = document.getElementById(board.id + "-tasks")
-
-  const taskElements = composeTasks(board)
-  boardColumn.appendChild(taskElements)
-}
-
 const composeTasks = (board) => {
   const fragment = document.createDocumentFragment()
 

@@ -1,4 +1,4 @@
-function createBoard(name) {
+function createBoard (name) {
   const newBoard = {
     name: name,
     id: "board" + this.nextBoardId,
@@ -15,7 +15,7 @@ function createBoard(name) {
   this.nextBoardId += 1
 }
 
-function createTask({ name, description, dueDate, priority }) {
+function createTask ({ name, description, dueDate, priority }) {
   let newTask = {
     id: "task" + this.nextTaskId,
     name: name,
