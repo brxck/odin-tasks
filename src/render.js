@@ -1,22 +1,40 @@
-const view = document.getElementById("view")
+const viewColumn = document.getElementById("view-column")
+const menuColumn = document.getElementById("menu-column")
 
 const render = (elements, partial = false) => {
-  if (partial) view.innerHtml = ""
+  if (partial) viewColumn.innerHtml = ""
   elements.forEach((element) => {
-    view.appendChild(element)
+    viewColumn.appendChild(element)
   })
+}
+
+const renderMenu = () => {
+  const menu = createElement({tag: "aside", className: "menu"})
+  const label = createElement({tag: "p", className: "menu-label", content: "projects"})
+  const list = createElement({tag: "ul", className: "menu-list", id: "project-list"})
+
+  menu.appendChild(label)
+  menu.appendChild(list)
+  menuColumn.appendChild(menu)
 }
 
 const renderProjects = (projects) => {
-  const elements = []
-  projects.list.forEach((project) => {
-    let projectElement = createProjectElement(project)
-    elements.push(projectElement)
-  })
-  render(elements)
+  const list = document.getElementById("project-list")
+  const elements = composeProjects(projects)
+  elements.forEach((element) => list.appendChild(element))
 }
 
-const createProjectElement = (project) => {
+const composeProjects = (projects) => {
+  const elements = []
+  projects.list.forEach((project) => {
+    let projectElement = createElement({tag: "li", content: `<a>${project.name}</a>`})
+    // projectElement.addEventListener(() => {    })
+    elements.push(projectElement)
+  })
+  return elements
+}
+
+const createTaskElement = (project) => {
   const fragment = document.createDocumentFragment()
 
   const card = createElement({
@@ -72,4 +90,4 @@ const createElement = (properties) => {
   return element
 }
 
-export { createProjectElement, renderProjects }
+export { renderMenu, renderProjects }

@@ -1,4 +1,5 @@
 import { createProject, deleteProject, projects } from "./todo"
+import { renderMenu, renderProjects } from "./render"
 import "./index.scss"
 
 projects.project0.createTask({
@@ -7,5 +8,8 @@ projects.project0.createTask({
   dueDate: "5/5/2019",
   priority: 5
 })
+
+renderMenu()
+renderProjects(projects)
 
 console.log(projects)
