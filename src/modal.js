@@ -1,6 +1,7 @@
-import { createElement, priorityClass } from "./helpers"
+import { createElement, appendChildren, priorityClass } from "./helpers"
+import distanceInWordsToNow from "date-fns/distance_in_words_to_now"
 
-const renderModalCard = (task) => {
+const renderModal = (content) => {
   const modal = createElement({ tag: "div", className: "modal is-active", id: "modal" })
   const background = createElement({
     tag: "div",
@@ -8,11 +9,10 @@ const renderModalCard = (task) => {
     eventListener: ["click", clearModal]
   })
   const close = createElement({ tag: "button", className: "modal-close is-large" })
-  const card = composeTaskCard(task)
 
   modal.appendChild(background)
-  modal.appendChild(card)
   modal.appendChild(close)
+  modal.appendChild(content)
 
   document.body.appendChild(modal)
 }
@@ -21,27 +21,76 @@ const clearModal = () => {
   document.getElementById("modal").remove()
 }
 
+const renderTaskModal = (task) => {
+  renderModal(composeTaskCard(task))
+}
+
 const composeTaskCard = (task) => {
+  const taskMedia = document.getElementById(task.id)
+
   const card = createElement({ tag: "article", className: "card" })
-  const cardHead = createElement({ tag: "header", className: "card-header level" })
-  const cardTitle = createElement({
-    tag: "p",
-    className: "card-header-title",
-    content: task.name
-  })
-  const cardBody = createElement({
-    tag: "div",
-    className: "card-content",
-    content: task.description
-  })
+  const cardHead = createElement({ tag: "header", className: "card-header" })
+  const cardTitle = taskMedia.cloneNode(true)
+  const cardContent = createElement({ tag: "div", className: "card-content" })
   const cardFoot = createElement({ tag: "footer", className: "card-footer" })
 
-  card.appendChild(cardHead)
-  card.appendChild(cardBody)
-  card.appendChild(cardFoot)
+  cardContent.appendChild(composeCardContent(task))
   cardHead.appendChild(cardTitle)
+  appendChildren(card, [cardHead, cardContent, cardFoot])
 
   return card
 }
 
-export { renderModalCard }
+const composeCardContent = (task) => {
+  const fragment = document.createDocumentFragment()
+
+  const descriptionContent = task.description || "Add a description..."
+  const descriptionClass = task.description || "has-text-grey-light"
+
+  const description = createElement({
+    tag: "p",
+    content: descriptionContent,
+    className: descriptionClass
+  })
+
+  const tagsContainer = createElement({
+    tag: "div",
+    className: "field is-grouped is-grouped-multiline",
+    id: "card-tags"
+  })
+
+  const dueDate = composeCompoundTag([
+    { content: "Due Date" },
+    { content: distanceInWordsToNow(task.dueDate), className: "is-info" },
+    { content: task.dueDate, className: "is-link" }
+  ])
+
+  const priority = composeCompoundTag([
+    { content: "Priority" },
+    { content: task.priority, className: priorityClass(task.priority) }
+  ])
+
+  appendChildren(tagsContainer, [dueDate, priority])
+  appendChildren(fragment, [description, tagsContainer])
+
+  return fragment
+}
+
+const composeCompoundTag = (tags) => {
+  const controlContainer = createElement({tag: "div", className: "control"})
+  const tagContainer = createElement({tag: "div", className: "tags has-addons"})
+
+  tags.forEach((tag) => {
+    let newTag = createElement({
+      tag: "span",
+      className: "tag " + tag.className || "",
+      content: tag.content
+    })
+    tagContainer.appendChild(newTag)
+  })
+
+  controlContainer.appendChild(tagContainer)
+  return controlContainer
+}
+
+export { renderTaskModal }

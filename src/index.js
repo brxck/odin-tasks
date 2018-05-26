@@ -2,11 +2,13 @@
 
 import { createProject, deleteProject, projects } from "./todo"
 import { renderMenu, renderProjects } from "./menu"
-import renderBoards from "./boards"
+import { renderBoards } from "./boards"
 import "./index.scss"
 import seed from "./seed"
 
 seed(projects)
+
+console.log(projects)
 
 renderMenu()
 renderProjects(projects)

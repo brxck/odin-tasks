@@ -10,17 +10,21 @@ const createElement = ({ tag, className, id, content, child, eventListener }) =>
   return element
 }
 
+const appendChildren = (parent, children) => {
+  children.forEach((child) => parent.appendChild(child))
+}
+
 const priorityClass = (priority) => {
   switch (priority) {
-    case 0:
+    case "low":
       return ""
-    case 1:
+    case "medium":
       return "is-info"
-    case 2:
+    case "high":
       return "is-success"
-    case 3:
+    case "urgent":
       return "is-danger"
   }
 }
 
-export { createElement, priorityClass }
+export { createElement, appendChildren, priorityClass }

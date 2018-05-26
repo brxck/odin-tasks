@@ -3,3 +3,15 @@
 .clickable {
   cursor: pointer;
 }
+
+.modal > .card {
+  min-width: 30%;
+}
+
+.card-header > .media {
+  padding: 1em;
+}
+
+#card-tags {
+  margin-top: 1.25em;
+}

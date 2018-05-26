@@ -1,5 +1,5 @@
 import { createElement, priorityClass } from "./helpers"
-import { renderModalCard } from "./modal"
+import { renderTaskModal } from "./modal"
 
 const composeTasks = (board) => {
   const fragment = document.createDocumentFragment()
@@ -8,7 +8,8 @@ const composeTasks = (board) => {
     const media = createElement({
       tag: "article",
       className: "media clickable",
-      eventListener: ["click", () => renderModalCard(task)]
+      id: task.id,
+      eventListener: ["click", () => renderTaskModal(task)]
     })
     const left = createElement({ tag: "div", className: "media-left" })
     const content = createElement({ tag: "p", className: "media-content", content: task.name })
