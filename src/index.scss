@@ -1,6 +1,6 @@
 @import "~bulma/bulma";
 
-.clickable {
+.is-clickable {
   cursor: pointer;
 }
 
@@ -14,4 +14,8 @@
 
 #card-tags {
   margin-top: 1.25em;
+}
+
+.is-clear {
+  visibility: hidden;
 }

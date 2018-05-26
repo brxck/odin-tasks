@@ -1,4 +1,5 @@
 import { createElement, appendChildren, priorityClass } from "./helpers"
+import { composeTask } from "./tasks"
 import distanceInWordsToNow from "date-fns/distance_in_words_to_now"
 
 const renderModal = (content) => {
@@ -26,11 +27,9 @@ const renderTaskModal = (task) => {
 }
 
 const composeTaskCard = (task) => {
-  const taskMedia = document.getElementById(task.id)
-
   const card = createElement({ tag: "article", className: "card" })
   const cardHead = createElement({ tag: "header", className: "card-header" })
-  const cardTitle = taskMedia.cloneNode(true)
+  const cardTitle = composeTask(task)
   const cardContent = createElement({ tag: "div", className: "card-content" })
   const cardFoot = createElement({ tag: "footer", className: "card-footer" })
 

@@ -5,6 +5,7 @@ import { renderMenu, renderProjects } from "./menu"
 import { renderBoards } from "./boards"
 import "./index.scss"
 import seed from "./seed"
+import "./icons"
 
 seed(projects)
 

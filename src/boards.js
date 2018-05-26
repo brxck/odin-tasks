@@ -1,5 +1,5 @@
 import { createElement } from "./helpers"
-import composeTasks from "./tasks"
+import { composeTasks } from "./tasks"
 
 const boardView = document.getElementById("board-view")
 const projectTitle = document.getElementById("project-title")
