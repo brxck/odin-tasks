@@ -1,5 +1,5 @@
 import { createElement, appendChildren } from "./helpers"
-import { renderBoards } from "./render"
+import { renderProject } from "./render"
 
 const composeMenu = (projects) => {
   const menu = createElement({tag: "aside", className: "menu"})
@@ -40,7 +40,7 @@ const composeProjects = (projects) => {
     let projectElement = createElement({
       tag: "li",
       content: `<a>${project.name}</a>`,
-      eventListener: ["click", () => renderBoards(project)]
+      eventListener: ["click", () => renderProject(project.id)]
     })
     elements.push(projectElement)
   })
