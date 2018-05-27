@@ -1,12 +1,14 @@
 "use strict"
 
 import { projects } from "./todo"
-import { renderMenu, renderBoards } from "./render"
+import { renderMenu, renderProject } from "./render"
 import "./index.scss"
 import seed from "./seed"
 import "./icons"
 
 seed(projects)
 
+console.log(projects)
+
 renderMenu(projects)
-renderBoards(projects.project0)
+renderProject("project0")

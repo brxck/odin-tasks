@@ -1,23 +1,36 @@
 import { composeModal } from "./modal.js"
 import { composeBoard } from "./boards.js"
 import { composeMenu, composeProjects } from "./menu.js"
+import { projects } from "./todo"
 
 const menuView = document.getElementById("menu-view")
 const boardView = document.getElementById("board-view")
 const titleView = document.getElementById("project-title")
+
+let currentProject
+
+const renderProject = (projectId) => {
+  currentProject = projects[projectId]
+  renderBoards(currentProject)
+}
 
 const renderModal = (content) => {
   const modal = composeModal(content)
   document.body.appendChild(modal)
 }
 
-const renderBoards = (project) => {
+const clearModal = () => {
+  renderBoards(projects)
+  document.getElementById("modal").remove()
+}
+
+const renderBoards = () => {
   boardView.innerHTML = ""
-  project.boards.forEach((board) => {
+  currentProject.boards.forEach((board) => {
     let newBoard = composeBoard(board)
     boardView.appendChild(newBoard)
   })
-  titleView.textContent = project.name
+  titleView.textContent = currentProject.name
 }
 
 const renderMenu = (projects) => {
@@ -31,4 +44,4 @@ const renderProjects = (projects) => {
   elements.forEach((element) => list.appendChild(element))
 }
 
-export { renderModal, renderBoards, renderMenu, renderProjects }
+export { renderProject, renderModal, clearModal, renderBoards, renderMenu, renderProjects }

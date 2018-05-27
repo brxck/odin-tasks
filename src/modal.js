@@ -1,4 +1,5 @@
 import { createElement, appendChildren } from "./helpers"
+import { clearModal } from "./render"
 
 const composeModal = (content) => {
   const modal = createElement({ tag: "div", className: "modal is-active", id: "modal" })
@@ -12,10 +13,6 @@ const composeModal = (content) => {
   appendChildren(modal, [background, close, content])
 
   return modal
-}
-
-const clearModal = () => {
-  document.getElementById("modal").remove()
 }
 
 export { composeModal }
