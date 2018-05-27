@@ -3,13 +3,33 @@ import { renderBoards } from "./render"
 
 const composeMenu = (projects) => {
   const menu = createElement({tag: "aside", className: "menu"})
-  const label = createElement({tag: "p", className: "menu-label", content: "projects"})
-  const list = createElement({tag: "ul", className: "menu-list"})
-
+  const projectLabel = createElement({
+    tag: "p",
+    className: "menu-label",
+    content: "projects"
+  })
+  const controlLabel = createElement({
+    tag: "p",
+    className: "menu-label",
+    content: "odin-todo"
+  })
+  const controlList = createElement({ tag: "ul", className: "menu-list" })
+  const projectList = createElement({tag: "ul", className: "menu-list"})
+  const controlElements = [
+    createElement({
+      tag: "li",
+      content: "<a>Create project</a>"
+    }),
+    createElement({
+      tag: "li",
+      content: "<a>New board</a>"
+    })
+  ]
   const projectElements = composeProjects(projects)
 
-  appendChildren(menu, [label, list])
-  appendChildren(list, projectElements)
+  appendChildren(menu, [controlLabel, controlList, projectLabel, projectList])
+  appendChildren(controlList, controlElements)
+  appendChildren(projectList, projectElements)
 
   return menu
 }
