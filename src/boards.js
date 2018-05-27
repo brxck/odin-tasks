@@ -1,5 +1,6 @@
 import { createElement } from "./helpers"
 import { composeTasks } from "./tasks"
+import { editKeyPress, saveEdit } from "./edit"
 
 const composeBoard = (board) => {
   const column = createElement({ tag: "div", className: "column" })
@@ -18,7 +19,8 @@ const composeBoard = (board) => {
   const title = createElement({
     tag: "p",
     className: "card-header-title",
-    content: board.name
+    content: board.name,
+    options: [["contentEditable", true]]
   })
 
   const content = createElement({
@@ -39,6 +41,9 @@ const composeBoard = (board) => {
     className: "icon",
     content: `<i class="">${""}</i>`
   })
+
+  title.addEventListener("keypress", (event) => editKeyPress(event))
+  title.addEventListener("focusout", (event) => saveEdit(event, board, "name"))
 
   column.appendChild(card)
   card.appendChild(header)

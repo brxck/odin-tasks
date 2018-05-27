@@ -1,14 +1,20 @@
-const createElement = ({ tag, className, id, content, child, eventListener }) => {
-  let element = document.createElement(tag)
-  if (className) { element.className = className }
-  if (id) { element.id = id }
-  if (content) { element.innerHTML = content }
-  if (child) { element.appendChild(child) }
-  if (eventListener) {
-    element.addEventListener(eventListener[0], eventListener[1])
+const createElement =
+  ({ tag, className, id, content, child, eventListener, options }) => {
+    let element = document.createElement(tag)
+    if (className) { element.className = className }
+    if (id) { element.id = id }
+    if (content) { element.innerHTML = content }
+    if (child) { element.appendChild(child) }
+    if (eventListener) {
+      element.addEventListener(eventListener[0], eventListener[1])
+    }
+    if (options) {
+      options.forEach(([ attribute, value ]) => {
+        element[attribute] = value
+      })
+    }
+    return element
   }
-  return element
-}
 
 const appendChildren = (parent, children) => {
   children.forEach((child) => parent.appendChild(child))

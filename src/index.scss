@@ -19,3 +19,7 @@
 .is-clear {
   visibility: hidden;
 }
+
+[contenteditable]:focus {
+  outline: 0px solid transparent;
+}
