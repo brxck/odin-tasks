@@ -1,4 +1,4 @@
-import { createElement } from "./helpers"
+import { createElement, appendChildren } from "./helpers"
 
 const composeModal = (content) => {
   const modal = createElement({ tag: "div", className: "modal is-active", id: "modal" })
@@ -9,9 +9,7 @@ const composeModal = (content) => {
   })
   const close = createElement({ tag: "button", className: "modal-close is-large" })
 
-  modal.appendChild(background)
-  modal.appendChild(close)
-  modal.appendChild(content)
+  appendChildren(modal, [background, close, content])
 
   return modal
 }

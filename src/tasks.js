@@ -32,9 +32,7 @@ const composeTask = (task) => {
   const checkbox = composeCheckbox(task)
 
   left.appendChild(checkbox)
-  media.appendChild(left)
-  media.appendChild(content)
-  media.appendChild(icons)
+  appendChildren(media, [left, content, icons])
 
   return media
 }
