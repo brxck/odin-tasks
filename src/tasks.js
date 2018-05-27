@@ -47,6 +47,7 @@ const composeCheckbox = (task) => {
   const button = createElement({
     tag: "button",
     className: "button " + priorityClass(task.priority),
+    id: "checkbox",
     eventListener: ["click", (event) => toggleCheckbox(event, task)]
   })
   const iconContainer = createElement({ tag: "span", className: "icon" })
@@ -65,6 +66,14 @@ const composeCheckbox = (task) => {
 const toggleCheckbox = (event, task) => {
   task.toggleCompleted()
   event.target.firstChild.classList.toggle("is-clear")
+}
+
+const cyclePriorityTag = (event, task) => {
+  task.togglePriority()
+  event.target.innerHTML = task.priority
+  event.target.className = "tag " + priorityClass(task.priority)
+  const checkbox = document.getElementById("modal").querySelector("#checkbox")
+  checkbox.className = "button " + priorityClass(task.priority)
 }
 
 const composeTaskCard = (task) => {
@@ -109,7 +118,9 @@ const composeCardContent = (task) => {
 
   const priority = composeCompoundTag([
     { content: "Priority" },
-    { content: task.priority, className: priorityClass(task.priority) }
+    { content: task.priority,
+      className: priorityClass(task.priority),
+      eventListener: ["click", (event) => cyclePriorityTag(event, task)] }
   ])
 
   appendChildren(tagsContainer, [dueDate, priority])
@@ -126,7 +137,8 @@ const composeCompoundTag = (tags) => {
     let newTag = createElement({
       tag: "span",
       className: "tag " + tag.className || "",
-      content: tag.content
+      content: tag.content,
+      eventListener: tag.eventListener
     })
     tagContainer.appendChild(newTag)
   })

@@ -30,6 +30,23 @@ function createTask ({ name, description = "", dueDate, priority }) {
 
     toggleCompleted () {
       this.completed = !this.completed
+    },
+
+    togglePriority () {
+      const priority = this.priority
+      // Immediately invoked arrow fn to assign from switch
+      this.priority = ((priority) => {
+        switch (priority) {
+          case "low":
+            return "medium"
+          case "medium":
+            return "high"
+          case "high":
+            return "urgent"
+          case "urgent":
+            return "low"
+        }
+      })(priority)
     }
   }
   this.tasks.push(newTask)
