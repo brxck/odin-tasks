@@ -2,7 +2,7 @@
 
 import { createProject, deleteProject, projects } from "./todo"
 import { renderMenu, renderProjects } from "./menu"
-import { renderBoards } from "./boards"
+import { renderBoards } from "./render"
 import "./index.scss"
 import seed from "./seed"
 import "./icons"

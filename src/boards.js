@@ -1,18 +1,6 @@
 import { createElement } from "./helpers"
 import { composeTasks } from "./tasks"
 
-const boardView = document.getElementById("board-view")
-const projectTitle = document.getElementById("project-title")
-
-const renderBoards = (project) => {
-  boardView.innerHTML = ""
-  project.boards.forEach((board) => {
-    let newBoard = composeBoard(board)
-    boardView.appendChild(newBoard)
-  })
-  projectTitle.textContent = project.name
-}
-
 const composeBoard = (board) => {
   const column = createElement({ tag: "div", className: "column" })
 
@@ -62,4 +50,4 @@ const composeBoard = (board) => {
   return column
 }
 
-export { renderBoards }
+export { composeBoard }
