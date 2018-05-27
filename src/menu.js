@@ -1,22 +1,17 @@
-import { createElement } from "./helpers"
-import { renderBoards } from "./boards"
+import { createElement, appendChildren } from "./helpers"
+import { renderBoards } from "./render"
 
-const menuView = document.getElementById("menu-view")
-
-const renderMenu = () => {
+const composeMenu = (projects) => {
   const menu = createElement({tag: "aside", className: "menu"})
   const label = createElement({tag: "p", className: "menu-label", content: "projects"})
-  const list = createElement({tag: "ul", className: "menu-list", id: "project-list"})
+  const list = createElement({tag: "ul", className: "menu-list"})
 
-  menu.appendChild(label)
-  menu.appendChild(list)
-  menuView.appendChild(menu)
-}
+  const projectElements = composeProjects(projects)
 
-const renderProjects = (projects) => {
-  const list = document.getElementById("project-list")
-  const elements = composeProjects(projects)
-  elements.forEach((element) => list.appendChild(element))
+  appendChildren(menu, [label, list])
+  appendChildren(list, projectElements)
+
+  return menu
 }
 
 const composeProjects = (projects) => {
@@ -32,4 +27,4 @@ const composeProjects = (projects) => {
   return elements
 }
 
-export { renderMenu, renderProjects }
+export { composeMenu, composeProjects }
