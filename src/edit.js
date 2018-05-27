@@ -9,4 +9,10 @@ const saveEdit = (event, edit, property) => {
   edit[property] = event.target.innerHTML
 }
 
-export { editKeyPress, saveEdit }
+const makeEditable = (element, target, property) => {
+  element.contentEditable = true
+  element.addEventListener("keypress", (event) => editKeyPress(event))
+  element.addEventListener("focusout", (event) => saveEdit(event, target, property))
+}
+
+export { editKeyPress, saveEdit, makeEditable }
