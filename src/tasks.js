@@ -2,6 +2,7 @@ import { createElement, appendChildren, priorityClass } from "./helpers"
 import { renderModal } from "./render"
 import fontawesome from "@fortawesome/fontawesome"
 import distanceInWordsToNow from "date-fns/distance_in_words_to_now"
+import { makeEditable } from "./edit"
 
 const composeTasks = (board) => {
   const fragment = document.createDocumentFragment()
@@ -67,6 +68,8 @@ const composeTaskCard = (task) => {
   const cardTitle = composeTask(task)
   const cardContent = createElement({ tag: "div", className: "card-content" })
   const cardFoot = createElement({ tag: "footer", className: "card-footer" })
+
+  makeEditable(cardTitle.querySelector(".media-content"), task, "name")
 
   cardContent.appendChild(composeCardContent(task))
   cardHead.appendChild(cardTitle)
