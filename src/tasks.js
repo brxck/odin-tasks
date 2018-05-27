@@ -9,9 +9,8 @@ const composeTasks = (board) => {
 
   board.tasks.forEach((task) => {
     const newTask = composeTask(task)
-    newTask.querySelector(".media-content")
-      .addEventListener("click", () => renderModal(composeTaskCard(task)))
     fragment.appendChild(newTask)
+    newTask.addEventListener("click", (event) => taskView(event, task))
   })
 
   return fragment
@@ -20,13 +19,13 @@ const composeTasks = (board) => {
 const composeTask = (task) => {
   const media = createElement({
     tag: "article",
-    className: "media",
+    className: "media is-clickable",
     id: task.id
   })
   const left = createElement({ tag: "div", className: "media-left" })
   const content = createElement({
     tag: "p",
-    className: "media-content is-clickable",
+    className: "media-content",
     content: task.name
   })
   const icons = createElement({ tag: "div", className: "media-right" })
@@ -36,6 +35,12 @@ const composeTask = (task) => {
   appendChildren(media, [left, content, icons])
 
   return media
+}
+
+const taskView = (event, task) => {
+  if (event.target.classList.contains("button")) return
+  const taskCard = composeTaskCard(task)
+  renderModal(taskCard)
 }
 
 const composeCheckbox = (task) => {
