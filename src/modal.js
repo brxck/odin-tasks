@@ -8,7 +8,11 @@ const composeModal = (content) => {
     className: "modal-background",
     eventListener: ["click", clearModal]
   })
-  const close = createElement({ tag: "button", className: "modal-close is-large" })
+  const close = createElement({
+    tag: "button",
+    className: "modal-close is-large",
+    eventListener: ["click", clearModal]
+  })
 
   appendChildren(modal, [background, close, content])
 
