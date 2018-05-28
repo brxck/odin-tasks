@@ -10,12 +10,12 @@ const titleView = document.getElementById("project-title")
 
 let currentProject
 
-const renderProject = (projectId) => {
+const renderProject = projectId => {
   currentProject = projects[projectId]
   renderBoards(currentProject)
 }
 
-const renderModal = (content) => {
+const renderModal = content => {
   const modal = composeModal(content)
   document.body.appendChild(modal)
 }
@@ -27,7 +27,7 @@ const clearModal = () => {
 
 const renderBoards = () => {
   boardView.innerHTML = ""
-  currentProject.boards.forEach((board) => {
+  currentProject.boards.forEach(board => {
     let newBoard = composeBoard(board)
     boardView.appendChild(newBoard)
   })
@@ -35,15 +35,15 @@ const renderBoards = () => {
   makeEditable(titleView, currentProject, "name")
 }
 
-const renderMenu = (projects) => {
+const renderMenu = projects => {
   const menu = composeMenu(projects)
   menuView.appendChild(menu)
 }
 
-const renderProjects = (projects) => {
+const renderProjects = projects => {
   const list = document.getElementById("project-list")
   const elements = composeProjects(projects)
-  elements.forEach((element) => list.appendChild(element))
+  elements.forEach(element => list.appendChild(element))
 }
 
 export {

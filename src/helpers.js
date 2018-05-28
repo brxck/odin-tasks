@@ -1,3 +1,4 @@
+// prettier-ignore
 const createElement =
   ({ tag, className, id, content, child, eventListener, options }) => {
     let element = document.createElement(tag)
@@ -17,10 +18,10 @@ const createElement =
   }
 
 const appendChildren = (parent, children) => {
-  children.forEach((child) => parent.appendChild(child))
+  children.forEach(child => parent.appendChild(child))
 }
 
-const priorityClass = (priority) => {
+const priorityClass = priority => {
   switch (priority) {
     case "low":
       return ""

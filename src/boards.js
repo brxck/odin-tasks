@@ -2,7 +2,7 @@ import { createElement } from "./helpers"
 import { composeTasks } from "./tasks"
 import { makeEditable } from "./edit"
 
-const composeBoard = (board) => {
+const composeBoard = board => {
   const column = createElement({ tag: "div", className: "column" })
 
   const card = createElement({

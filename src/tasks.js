@@ -4,19 +4,19 @@ import fontawesome from "@fortawesome/fontawesome"
 import distanceInWordsToNow from "date-fns/distance_in_words_to_now"
 import { makeEditable } from "./edit"
 
-const composeTasks = (board) => {
+const composeTasks = board => {
   const fragment = document.createDocumentFragment()
 
-  board.tasks.forEach((task) => {
+  board.tasks.forEach(task => {
     const newTask = composeTask(task)
     fragment.appendChild(newTask)
-    newTask.addEventListener("click", (event) => taskView(event, task))
+    newTask.addEventListener("click", event => taskView(event, task))
   })
 
   return fragment
 }
 
-const composeTask = (task) => {
+const composeTask = task => {
   const media = createElement({
     tag: "article",
     className: "media is-clickable",
@@ -43,17 +43,17 @@ const taskView = (event, task) => {
   renderModal(taskCard)
 }
 
-const composeCheckbox = (task) => {
+const composeCheckbox = task => {
   const button = createElement({
     tag: "button",
     className: "button " + priorityClass(task.priority),
     id: "checkbox",
-    eventListener: ["click", (event) => toggleCheckbox(event, task)]
+    eventListener: ["click", event => toggleCheckbox(event, task)]
   })
   const iconContainer = createElement({ tag: "span", className: "icon" })
   const icon = createElement({
     tag: "i",
-    content: fontawesome.icon({iconName: "check"}).html
+    content: fontawesome.icon({ iconName: "check" }).html
   })
 
   if (!task.completed) iconContainer.classList.add("is-clear")
@@ -76,7 +76,7 @@ const cyclePriorityTag = (event, task) => {
   checkbox.className = "button " + priorityClass(task.priority)
 }
 
-const composeTaskCard = (task) => {
+const composeTaskCard = task => {
   const card = createElement({ tag: "article", className: "card" })
   const cardHead = createElement({ tag: "header", className: "card-header" })
   const cardTitle = composeTask(task)
@@ -92,7 +92,7 @@ const composeTaskCard = (task) => {
   return card
 }
 
-const composeCardContent = (task) => {
+const composeCardContent = task => {
   const fragment = document.createDocumentFragment()
 
   const descriptionContent = task.description || "Add a description..."
@@ -118,9 +118,11 @@ const composeCardContent = (task) => {
 
   const priority = composeCompoundTag([
     { content: "Priority" },
-    { content: task.priority,
+    {
+      content: task.priority,
       className: priorityClass(task.priority),
-      eventListener: ["click", (event) => cyclePriorityTag(event, task)] }
+      eventListener: ["click", event => cyclePriorityTag(event, task)]
+    }
   ])
 
   appendChildren(tagsContainer, [dueDate, priority])
@@ -129,11 +131,11 @@ const composeCardContent = (task) => {
   return fragment
 }
 
-const composeCompoundTag = (tags) => {
-  const controlContainer = createElement({tag: "div", className: "control"})
-  const tagContainer = createElement({tag: "div", className: "tags has-addons"})
+const composeCompoundTag = tags => {
+  const controlContainer = createElement({ tag: "div", className: "control" })
+  const tagContainer = createElement({ tag: "div", className: "tags has-addons" })
 
-  tags.forEach((tag) => {
+  tags.forEach(tag => {
     let newTag = createElement({
       tag: "span",
       className: "tag " + tag.className || "",

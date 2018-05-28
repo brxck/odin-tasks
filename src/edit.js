@@ -1,4 +1,4 @@
-const editKeyPress = (event) => {
+const editKeyPress = event => {
   if (event.key === "Enter") {
     event.preventDefault()
     event.target.blur()
@@ -11,16 +11,12 @@ const saveEdit = (event, edit, property) => {
 }
 
 const makeEditable = (element, edit, property) => {
-  element.addEventListener("click", (e) => {
+  element.addEventListener("click", e => {
     e.target.contentEditable = true
     e.target.focus()
   })
-  element.addEventListener("keypress", (e) => editKeyPress(e))
-  element.addEventListener("focusout", (e) => saveEdit(e, edit, property))
+  element.addEventListener("keypress", e => editKeyPress(e))
+  element.addEventListener("focusout", e => saveEdit(e, edit, property))
 }
 
-export {
-  editKeyPress,
-  saveEdit,
-  makeEditable
-}
+export { editKeyPress, saveEdit, makeEditable }
