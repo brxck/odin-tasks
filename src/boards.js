@@ -19,8 +19,7 @@ const composeBoard = (board) => {
   const title = createElement({
     tag: "p",
     className: "card-header-title",
-    content: board.name,
-    options: [["contentEditable", true]]
+    content: board.name
   })
 
   const content = createElement({

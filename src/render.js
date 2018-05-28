@@ -2,6 +2,7 @@ import { composeModal } from "./modal.js"
 import { composeBoard } from "./boards.js"
 import { composeMenu, composeProjects } from "./menu.js"
 import { projects } from "./todo"
+import { makeEditable } from "./edit"
 
 const menuView = document.getElementById("menu-view")
 const boardView = document.getElementById("board-view")
@@ -31,6 +32,7 @@ const renderBoards = () => {
     boardView.appendChild(newBoard)
   })
   titleView.textContent = currentProject.name
+  makeEditable(titleView, currentProject, "name")
 }
 
 const renderMenu = (projects) => {
@@ -44,4 +46,11 @@ const renderProjects = (projects) => {
   elements.forEach((element) => list.appendChild(element))
 }
 
-export { renderProject, renderModal, clearModal, renderBoards, renderMenu, renderProjects }
+export {
+  renderProject,
+  renderModal,
+  clearModal,
+  renderBoards,
+  renderMenu,
+  renderProjects
+}
