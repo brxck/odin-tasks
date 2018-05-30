@@ -14,7 +14,11 @@ const composeMenu = projects => {
     content: "odin-todo"
   })
   const controlList = createElement({ tag: "ul", className: "menu-list" })
-  const projectList = createElement({ tag: "ul", className: "menu-list" })
+  const projectList = createElement({
+    tag: "ul",
+    className: "menu-list",
+    id: "project-list"
+  })
   const controlElements = [
     createElement({
       tag: "li",

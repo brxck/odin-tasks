@@ -96,12 +96,10 @@ const composeCardContent = task => {
   const fragment = document.createDocumentFragment()
 
   const descriptionContent = task.description || "Add a description..."
-  const descriptionClass = task.description || "has-text-grey-light"
 
   const description = createElement({
     tag: "p",
-    content: descriptionContent,
-    className: descriptionClass
+    content: descriptionContent
   })
 
   const tagsContainer = createElement({
@@ -124,6 +122,8 @@ const composeCardContent = task => {
       eventListener: ["click", event => cyclePriorityTag(event, task)]
     }
   ])
+
+  makeEditable(description, task, "description")
 
   appendChildren(tagsContainer, [dueDate, priority])
   appendChildren(fragment, [description, tagsContainer])

@@ -33,16 +33,19 @@ const renderBoards = () => {
   })
   titleView.textContent = currentProject.name
   makeEditable(titleView, currentProject, "name")
+  // Duplicate named event listeners are discarded
+  titleView.addEventListener("focusout", renderProjects)
 }
 
-const renderMenu = projects => {
+const renderMenu = () => {
   const menu = composeMenu(projects)
   menuView.appendChild(menu)
 }
 
-const renderProjects = projects => {
+const renderProjects = () => {
   const list = document.getElementById("project-list")
   const elements = composeProjects(projects)
+  list.innerHTML = ""
   elements.forEach(element => list.appendChild(element))
 }
 

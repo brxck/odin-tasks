@@ -10,5 +10,5 @@ seed(projects)
 
 console.log(projects)
 
-renderMenu(projects)
+renderMenu()
 renderProject("project0")
