@@ -1,6 +1,7 @@
-import { composeModal } from "./modal.js"
-import { composeBoard } from "./boards.js"
-import { composeMenu, composeProjects } from "./menu.js"
+import { composeModal } from "./modal"
+import { composeTaskCard } from "./tasks"
+import { composeBoard } from "./boards"
+import { composeMenu, composeProjects } from "./menu"
 import { projects } from "./todo"
 import { makeEditable } from "./edit"
 
