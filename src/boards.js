@@ -1,6 +1,7 @@
 import { createElement } from "./helpers"
 import { composeTasks } from "./tasks"
 import { makeEditable } from "./edit"
+import { renderMenu } from "./render"
 
 const composeBoard = board => {
   const column = createElement({ tag: "div", className: "column" })
