@@ -8,12 +8,15 @@ function createBoard (name) {
   const newBoard = {
     name: name,
     id: "board" + this.nextBoardId,
+    project: this,
     nextTaskId: 0,
     tasks: [],
     createTask,
 
     deleteTask (id) {
-      delete this.tasks[id]
+      let index = this.tasks.indexOf(this[id])
+      delete this.tasks[index]
+      delete this[id]
     }
   }
   this.boards.push(newBoard)
