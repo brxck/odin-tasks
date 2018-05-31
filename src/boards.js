@@ -1,7 +1,8 @@
 import { createElement } from "./helpers"
 import { composeTasks } from "./tasks"
 import { makeEditable } from "./edit"
-import { renderMenu } from "./render"
+import { renderCreateTask } from "./render"
+import fontawesome from "@fortawesome/fontawesome"
 
 const composeBoard = board => {
   const column = createElement({ tag: "div", className: "column" })
@@ -32,14 +33,25 @@ const composeBoard = board => {
 
   // Use for future icons
   const iconLink = createElement({
-    tag: "a",
-    className: "card-header-icon"
+    tag: "span",
+    className: "card-header-icon",
+    eventListener: [
+      "click",
+      e =>
+        renderCreateTask(
+          board.createTask({
+            name: "New task",
+            dueDate: Date.now() + 1000 * 60 * 60 * 24,
+            priority: "low"
+          })
+        )
+    ]
   })
 
   const icon = createElement({
     tag: "span",
     className: "icon",
-    content: `<i class="">${""}</i>`
+    content: `<i class="">${fontawesome.icon({ iconName: "plus" }).html}</i>`
   })
 
   makeEditable(title, board, "name")

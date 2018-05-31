@@ -28,16 +28,20 @@ function createTask ({ name, description = "", dueDate, priority }) {
   let newTask = {
     id: "task" + this.nextTaskId,
     name: name,
-    board: this.id,
+    board: this,
     description: description,
     dueDate: dueDate,
     priority: priority,
     completed: false,
 
+    deleteTask () {
+      this.board.deleteTask(this.id)
+    },
 
     displayDueDate () {
       return format(this.dueDate, "MM/DD/YY")
     },
+
     toggleCompleted () {
       this.completed = !this.completed
     },
@@ -62,6 +66,7 @@ function createTask ({ name, description = "", dueDate, priority }) {
   this.tasks.push(newTask)
   this[newTask.id] = newTask
   this.nextTaskId += 1
+  return newTask
 }
 
 function createProject (name) {

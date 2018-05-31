@@ -111,7 +111,7 @@ const composeCardContent = task => {
   const dueDate = composeCompoundTag([
     { content: "Due Date" },
     { content: distanceInWordsToNow(task.dueDate), className: "is-info" },
-    { content: task.dueDate, className: "is-link" }
+    { content: task.displayDueDate(), className: "is-link" }
   ])
 
   const priority = composeCompoundTag([
@@ -149,4 +149,4 @@ const composeCompoundTag = tags => {
   return controlContainer
 }
 
-export { composeTasks, composeTask }
+export { composeTasks, composeTask, composeTaskCard }
