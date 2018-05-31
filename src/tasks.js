@@ -1,5 +1,5 @@
 import { createElement, appendChildren, priorityClass } from "./helpers"
-import { renderModal } from "./render"
+import { renderModal, clearModal } from "./render"
 import fontawesome from "@fortawesome/fontawesome"
 import distanceInWordsToNow from "date-fns/distance_in_words_to_now"
 import { makeEditable } from "./edit"
@@ -24,11 +24,11 @@ const composeTask = task => {
   })
   const left = createElement({ tag: "div", className: "media-left" })
   const content = createElement({
-    tag: "p",
+    tag: "div",
     className: "media-content",
     content: task.name
   })
-  const icons = createElement({ tag: "div", className: "media-right" })
+  const icons = createElement({ tag: "div", className: "media-right is-pulled-right" })
   const checkbox = composeCheckbox(task)
 
   left.appendChild(checkbox)
@@ -79,12 +79,23 @@ const cyclePriorityTag = (event, task) => {
 const composeTaskCard = task => {
   const card = createElement({ tag: "article", className: "card" })
   const cardHead = createElement({ tag: "header", className: "card-header" })
-  const cardTitle = composeTask(task)
   const cardContent = createElement({ tag: "div", className: "card-content" })
   const cardFoot = createElement({ tag: "footer", className: "card-footer" })
 
+  const cardTitle = composeTask(task)
+  const iconContainer = cardTitle.querySelector(".media-right")
+  const deleteIcon = createElement({
+    tag: "i",
+    className: "icon",
+    content: fontawesome.icon({ iconName: "trash" }).html
+  })
+  deleteIcon.addEventListener("click", () => {
+    task.deleteTask()
+    clearModal()
+  })
   makeEditable(cardTitle.querySelector(".media-content"), task, "name")
 
+  iconContainer.appendChild(deleteIcon)
   cardContent.appendChild(composeCardContent(task))
   cardHead.appendChild(cardTitle)
   appendChildren(card, [cardHead, cardContent, cardFoot])
