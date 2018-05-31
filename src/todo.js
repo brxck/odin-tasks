@@ -80,6 +80,8 @@ function createProject (name) {
   this.list.push(newProject)
   this[newProject.id] = newProject
   this.nextProjectId += 1
+
+  return newProject
 }
 
 const deleteProject = id => {
@@ -93,4 +95,4 @@ const projects = {
   nextProjectId: 0
 }
 
-export { createProject, deleteProject, projects }
+export { projects }

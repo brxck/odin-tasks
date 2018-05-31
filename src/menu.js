@@ -1,5 +1,6 @@
+import { projects } from "./todo"
 import { createElement, appendChildren } from "./helpers"
-import { renderProject } from "./render"
+import { renderProject, renderProjects } from "./render"
 
 const composeMenu = projects => {
   const menu = createElement({ tag: "aside", className: "menu" })
@@ -22,7 +23,15 @@ const composeMenu = projects => {
   const controlElements = [
     createElement({
       tag: "li",
-      content: "<a>Create project</a>"
+      content: "<a>Create project</a>",
+      eventListener: [
+        "click",
+        () => {
+          const newProject = projects.createProject("New project")
+          renderProjects()
+          renderProject(newProject.id)
+        }
+      ]
     }),
     createElement({
       tag: "li",
