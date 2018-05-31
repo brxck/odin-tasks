@@ -1,7 +1,7 @@
-import { createElement } from "./helpers"
+import { createElement, appendChildren } from "./helpers"
 import { composeTasks } from "./tasks"
 import { makeEditable } from "./edit"
-import { renderCreateTask } from "./render"
+import { renderProject, renderCreateTask } from "./render"
 import fontawesome from "@fortawesome/fontawesome"
 
 const composeBoard = board => {
@@ -32,19 +32,26 @@ const composeBoard = board => {
   })
 
   // Use for future icons
-  const iconLink = createElement({
+  const iconContainer = createElement({
     tag: "span",
     className: "card-header-icon"
   })
 
-  const icon = createElement({
+  const plusIcon = createElement({
     tag: "span",
     className: "icon",
     content: `<i class="">${fontawesome.icon({ iconName: "plus" }).html}</i>`
   })
 
+  const trashIcon = createElement({
+    tag: "span",
+    className: "icon",
+    content: `<i class="">${fontawesome.icon({ iconName: "trash" }).html}</i>`
+  })
+
   makeEditable(title, board, "name")
-  iconLink.addEventListener("click", e => {
+
+  plusIcon.addEventListener("click", () => {
     renderCreateTask(
       board.createTask({
         name: "New task",
@@ -54,11 +61,16 @@ const composeBoard = board => {
     )
   })
 
+  trashIcon.addEventListener("click", () => {
+    board.deleteBoard()
+    renderProject()
+  })
+
   column.appendChild(card)
   card.appendChild(header)
   header.appendChild(title)
-  iconLink.appendChild(icon)
-  header.appendChild(iconLink)
+  appendChildren(iconContainer, [plusIcon, trashIcon])
+  header.appendChild(iconContainer)
   card.appendChild(content)
 
   return column

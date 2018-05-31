@@ -17,6 +17,12 @@ function createBoard (name) {
       let index = this.tasks.indexOf(this[id])
       delete this.tasks[index]
       delete this[id]
+    },
+
+    deleteBoard () {
+      let index = this.project.boards.indexOf(this)
+      delete this.project.boards[index]
+      delete this.project[this]
     }
   }
   this.boards.push(newBoard)

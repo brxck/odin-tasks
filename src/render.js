@@ -12,7 +12,7 @@ const titleView = document.getElementById("project-title")
 
 let currentProject
 
-const renderProject = projectId => {
+const renderProject = (projectId = currentProject.id) => {
   currentProject = projects[projectId]
   renderBoards(currentProject)
 }
