@@ -57,6 +57,7 @@ const renderCreateTask = newTask => {
 }
 
 export {
+  currentProject,
   renderProject,
   renderModal,
   clearModal,
