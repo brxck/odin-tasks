@@ -28,3 +28,23 @@
 .media {
   width: 100%;
 }
+
+#board-view > .column {
+  min-width: 33%;
+  max-width: 33%;
+}
+
+#board-view {
+  overflow: scroll;
+  height: 100%;
+}
+
+html,
+body,
+.container,
+.section,
+.columns {
+  height: 100%;
+  padding-right: 0;
+  padding-bottom: 0;
+}
