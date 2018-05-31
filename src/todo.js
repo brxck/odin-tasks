@@ -1,3 +1,5 @@
+import format from "date-fns/format"
+
 // Lexical scoping of 'this' in arrow functions causes problems here. See:
 /* eslint-disable-next-line */
 // https://derickbailey.com/2015/09/28/do-es6-arrow-functions-really-solve-this-in-javascript/
@@ -29,6 +31,10 @@ function createTask ({ name, description = "", dueDate, priority }) {
     priority: priority,
     completed: false,
 
+
+    displayDueDate () {
+      return format(this.dueDate, "MM/DD/YY")
+    },
     toggleCompleted () {
       this.completed = !this.completed
     },
