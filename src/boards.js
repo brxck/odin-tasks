@@ -34,18 +34,7 @@ const composeBoard = board => {
   // Use for future icons
   const iconLink = createElement({
     tag: "span",
-    className: "card-header-icon",
-    eventListener: [
-      "click",
-      e =>
-        renderCreateTask(
-          board.createTask({
-            name: "New task",
-            dueDate: Date.now() + 1000 * 60 * 60 * 24,
-            priority: "low"
-          })
-        )
-    ]
+    className: "card-header-icon"
   })
 
   const icon = createElement({
@@ -55,6 +44,15 @@ const composeBoard = board => {
   })
 
   makeEditable(title, board, "name")
+  iconLink.addEventListener("click", e => {
+    renderCreateTask(
+      board.createTask({
+        name: "New task",
+        dueDate: Date.now() + 1000 * 60 * 60 * 24,
+        priority: "low"
+      })
+    )
+  })
 
   column.appendChild(card)
   card.appendChild(header)
