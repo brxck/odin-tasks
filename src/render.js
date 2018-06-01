@@ -2,7 +2,7 @@ import { composeModal } from "./modal"
 import { composeCreateTask } from "./tasks"
 import { composeBoard } from "./boards"
 import { composeMenu, composeProjects } from "./menu"
-import { projects } from "./todo"
+import projects from "./todo"
 import { makeEditable } from "./edit"
 import { createElement, appendChildren } from "./helpers"
 

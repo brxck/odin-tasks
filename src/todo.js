@@ -1,4 +1,4 @@
-import { format, parse, isValid } from "date-fns"
+import { format, parse, isValid, isThisYear, distanceInWordsToNow } from "date-fns"
 
 // Lexical scoping of 'this' in arrow functions causes problems here. See:
 /* eslint-disable-next-line */
@@ -45,7 +45,17 @@ function createTask ({ name, description = "", dueDate, priority }) {
     },
 
     displayDueDate () {
-      return format(this.dueDate, "MM/DD/YY")
+      return format(this.dueDate, "M/D/YY")
+    },
+
+    displayShortDueDate () {
+      let display = format(this.dueDate, "M/D")
+      if (!isThisYear(this.dueDate)) display += format(this.dueDate, "/YY")
+      return display
+    },
+
+    dueDateDistance () {
+      return distanceInWordsToNow(this.dueDate)
     },
 
     setDueDate (input) {
@@ -113,4 +123,4 @@ const projects = {
   nextProjectId: 0
 }
 
-export { projects }
+export default projects
