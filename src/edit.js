@@ -16,7 +16,9 @@ const makeEditable = (element, edit, property) => {
     e.target.focus()
   })
   element.addEventListener("keypress", e => editKeyPress(e))
-  element.addEventListener("focusout", e => saveEdit(e, edit, property))
+  if (typeof edit !== "undefined") {
+    element.addEventListener("focusout", e => saveEdit(e, edit, property))
+  }
 }
 
 export { editKeyPress, saveEdit, makeEditable }

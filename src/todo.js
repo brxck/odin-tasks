@@ -1,4 +1,4 @@
-import format from "date-fns/format"
+import { format, parse, isValid } from "date-fns"
 
 // Lexical scoping of 'this' in arrow functions causes problems here. See:
 /* eslint-disable-next-line */
@@ -46,6 +46,16 @@ function createTask ({ name, description = "", dueDate, priority }) {
 
     displayDueDate () {
       return format(this.dueDate, "MM/DD/YY")
+    },
+
+    setDueDate (input) {
+      const newDate = parse(input)
+      if (isValid(newDate)) {
+        this.dueDate = newDate
+        return this.dueDate
+      } else {
+        return false
+      }
     },
 
     toggleCompleted () {

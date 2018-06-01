@@ -121,8 +121,8 @@ const composeCardContent = task => {
 
   const dueDate = composeCompoundTag([
     { content: "Due Date" },
-    { content: distanceInWordsToNow(task.dueDate), className: "is-info" },
-    { content: task.displayDueDate(), className: "is-link" }
+    { content: distanceInWordsToNow(task.dueDate), className: "is-info", id: "distance" },
+    { content: task.displayDueDate(), className: "is-link", id: "due-date" }
   ])
 
   const priority = composeCompoundTag([
@@ -134,6 +134,13 @@ const composeCardContent = task => {
     }
   ])
 
+  const dateField = dueDate.querySelector("#due-date")
+  dateField.addEventListener("focusout", e => {
+    task.setDueDate(e.target.textContent)
+    e.target.textContent = task.displayDueDate()
+    dueDate.querySelector("#distance").textContent = distanceInWordsToNow(task.dueDate)
+  })
+  makeEditable(dateField)
   makeEditable(description, task, "description")
 
   appendChildren(tagsContainer, [dueDate, priority])
@@ -149,6 +156,7 @@ const composeCompoundTag = tags => {
   tags.forEach(tag => {
     let newTag = createElement({
       tag: "span",
+      id: tag.id,
       className: "tag " + tag.className || "",
       content: tag.content,
       eventListener: tag.eventListener
