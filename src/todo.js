@@ -91,6 +91,8 @@ function createProject (name) {
 }
 
 const deleteProject = id => {
+  let index = this.list.indexOf(projects[id])
+  delete this.list[index]
   delete projects[id]
 }
 
