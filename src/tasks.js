@@ -28,11 +28,15 @@ const composeTask = task => {
     className: "media-content",
     content: task.name
   })
-  const icons = createElement({ tag: "div", className: "media-right is-pulled-right" })
+  const right = createElement({
+    tag: "div",
+    className: "media-right media-due-date",
+    content: task.displayShortDueDate()
+  })
   const checkbox = composeCheckbox(task)
 
   left.appendChild(checkbox)
-  appendChildren(media, [left, content, icons])
+  appendChildren(media, [left, content, right])
 
   return media
 }
@@ -138,7 +142,7 @@ const composeCardContent = task => {
   dateField.addEventListener("focusout", e => {
     task.setDueDate(e.target.textContent)
     e.target.textContent = task.displayDueDate()
-    dueDate.querySelector("#distance").textContent = distanceInWordsToNow(task.dueDate)
+    dueDate.querySelector("#distance").textContent = task.dueDateDistance()
   })
   makeEditable(dateField)
   makeEditable(description, task, "description")
