@@ -3,12 +3,15 @@
 import projects from "./todo"
 import { renderMenu, renderProject } from "./render"
 import "./index.scss"
-import seed from "./seed"
 import "./icons"
+import seed from "./seed"
 
-seed(projects)
+seed()
 
-console.log(projects)
+// if (projects.list.length === 0) {
+//   console.log("seeding projects", projects)
+//   seed()
+// }
 
 renderMenu()
 renderProject("project0")

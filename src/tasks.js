@@ -94,7 +94,7 @@ const composeTaskCard = task => {
     content: fontawesome.icon({ iconName: "trash" }).html
   })
   deleteIcon.addEventListener("click", () => {
-    task.deleteTask()
+    task.remove()
     clearModal()
   })
   makeEditable(cardTitle.querySelector(".media-content"), task, "name")
@@ -188,7 +188,7 @@ const composeCreateTask = newTask => {
     eventListener: [
       "click",
       () => {
-        newTask.deleteTask()
+        newTask.remove()
         clearModal()
       }
     ]
