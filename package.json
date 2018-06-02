@@ -38,8 +38,8 @@
     "@fortawesome/fontawesome-free-regular": "^5.0.13",
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
     "bulma": "^0.7.1",
-    "circular-json": "^0.5.4",
     "date-fns": "^1.29.0",
+    "json-dry": "^1.0.3",
     "pug": "^2.0.3"
   }
 }
