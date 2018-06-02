@@ -1,6 +1,4 @@
-import projects from "./todo"
-
-const seed = () => {
+const seed = projects => {
   projects.createProject("OdinTasks")
   projects.project0.createBoard("Let's get started")
   projects.project0.createBoard("This is a board")

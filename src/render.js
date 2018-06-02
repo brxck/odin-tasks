@@ -10,9 +10,11 @@ const menuView = document.getElementById("menu-view")
 const boardView = document.getElementById("board-view")
 const titleView = document.getElementById("project-title")
 
-let currentProject
+let currentProject = "project0"
 
 const renderProject = (projectId = currentProject.id) => {
+  projects.save()
+  console.log("setting currentProject", projects[projectId])
   currentProject = projects[projectId]
   renderBoards(currentProject)
 }
@@ -25,6 +27,7 @@ const renderModal = content => {
 const clearModal = () => {
   renderBoards(projects)
   document.getElementById("modal").remove()
+  projects.save()
 }
 
 const renderBoards = () => {
@@ -45,6 +48,7 @@ const renderMenu = () => {
 }
 
 const renderProjects = () => {
+  projects.save()
   const list = document.getElementById("project-list")
   const elements = composeProjects(projects)
   list.innerHTML = ""
