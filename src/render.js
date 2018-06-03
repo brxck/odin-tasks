@@ -21,7 +21,7 @@ const renderProject = (projectId = currentProject.id) => {
   renderBoards(currentProject)
 
   deleteProject.innerHTML = fontawesome.icon({ iconName: "trash" }).html
-  deleteProject.addEventListener("click", () => {
+  deleteProject.firstChild.addEventListener("click", () => {
     if (projects.list.length <= 1) return
 
     currentProject.deleteProject()
