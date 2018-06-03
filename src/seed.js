@@ -124,6 +124,13 @@ const seed = projects => {
   })
 
   about.boards[2].createTask({
+    name: "json-dry",
+    description: "(But it only works sometimes...)\nhttps://github.com/skerit/json-dry",
+    dueDate: dueDate,
+    priority: "low"
+  })
+
+  about.boards[2].createTask({
     name: "date-fns",
     description: "https://date-fns.org/",
     dueDate: dueDate,
@@ -138,7 +145,7 @@ const seed = projects => {
   })
 
   about.boards[2].createTask({
-    name: "And voice coding",
+    name: "And voice coding!",
     description: "https://github.com/brxck/voice-coding",
     dueDate: dueDate,
     priority: "low"
