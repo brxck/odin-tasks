@@ -9,7 +9,7 @@ const composeBoard = board => {
 
   const card = createElement({
     tag: "article",
-    className: "card",
+    className: "card board",
     id: board.id
   })
 

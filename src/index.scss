@@ -1,11 +1,26 @@
 @import "~bulma/bulma";
 
+// tasks
+.media-content {
+  padding: 5px;
+}
+
+// modifiers
 .is-clickable {
   cursor: pointer;
 }
 
+.is-clear {
+  visibility: hidden;
+}
+
+// modal
 .modal > .card {
-  min-width: 30%;
+  min-width: 30em;
+}
+
+.modal .media-due-date {
+  color: white;
 }
 
 .card-header > .media {
@@ -16,27 +31,29 @@
   margin-top: 1.25em;
 }
 
-.is-clear {
-  visibility: hidden;
+.media {
+  width: 100%;
 }
 
+// editing
 [contenteditable]:focus {
   outline: 0px solid transparent;
   background-color: whitesmoke;
 }
 
-.media {
-  width: 100%;
-}
-
-#board-view > .column {
-  min-width: 33%;
-  max-width: 33%;
+// board view
+.board {
+  min-width: 20em;
+  max-width: 25em;
 }
 
 #board-view {
   overflow: scroll;
   height: 100%;
+}
+
+#board-view > .column {
+  max-width: 25em;
 }
 
 html,
@@ -47,4 +64,14 @@ body,
   height: 100%;
   padding-right: 0;
   padding-bottom: 0;
+}
+
+// icons
+
+.icon {
+  color: darkgray;
+
+  :hover {
+    color: gray;
+  }
 }
