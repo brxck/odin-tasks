@@ -123,9 +123,10 @@ class Board {
 }
 
 class Project {
-  constructor ({ id, name, nextId = 0, boards = [] }) {
+  constructor ({ id, name, controller, nextId = 0, boards = [] }) {
     this.id = id
     this.name = name
+    this.controller = controller
     this.nextId = nextId
     this.boards = boards
   }
@@ -136,6 +137,12 @@ class Project {
     this.boards.push(newBoard)
     this.nextId += 1
     return newBoard
+  }
+
+  deleteProject () {
+    let index = this.controller.list.indexOf(this)
+    delete this.controller.list[index]
+    delete this.controller[this]
   }
 
   toDry () {
@@ -156,7 +163,11 @@ class ToDo {
   }
 
   createProject (name) {
-    const newProject = new Project({ name: name, id: "project" + this.nextId })
+    const newProject = new Project({
+      name: name,
+      id: "project" + this.nextId,
+      controller: this
+    })
     this.list.push(newProject)
     this[newProject.id] = newProject
     this.nextId += 1
@@ -179,7 +190,10 @@ class ToDo {
 }
 
 const makeProperties = (target, list) => {
-  list.forEach(item => (target[item.id] = item))
+  list.forEach(item => {
+    if (item === null) return
+    target[item.id] = item
+  })
 }
 
 Dry.registerClass(Task)

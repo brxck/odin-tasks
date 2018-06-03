@@ -5,10 +5,12 @@ import { composeMenu, composeProjects } from "./menu"
 import projects from "./todo"
 import { makeEditable } from "./edit"
 import { createElement, appendChildren } from "./helpers"
+import fontawesome from "@fortawesome/fontawesome"
 
 const menuView = document.getElementById("menu-view")
 const boardView = document.getElementById("board-view")
 const titleView = document.getElementById("project-title")
+const deleteProject = document.getElementById("delete-project")
 
 let currentProject = "project0"
 
@@ -17,6 +19,16 @@ const renderProject = (projectId = currentProject.id) => {
 
   currentProject = projects[projectId]
   renderBoards(currentProject)
+
+  deleteProject.innerHTML = fontawesome.icon({ iconName: "trash" }).html
+  deleteProject.addEventListener("click", () => {
+    if (projects.list.length <= 1) return
+
+    currentProject.deleteProject()
+    currentProject = projects.list[0]
+    renderProjects()
+    renderProject(currentProject.id)
+  })
 }
 
 const renderModal = content => {
