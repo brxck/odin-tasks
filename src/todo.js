@@ -5,7 +5,7 @@ const Dry = require("json-dry")
 class Task {
   constructor ({
     id,
-    board,
+    boardId,
     name,
     description = "",
     dueDate,
@@ -13,12 +13,16 @@ class Task {
     completed = false
   }) {
     this.id = id
-    this.board = board
+    this.boardId = boardId
     this.name = name
     this.description = description
     this.dueDate = dueDate
     this.priority = priority
     this.completed = completed
+  }
+
+  get board () {
+    return projects.search(this.boardId)
   }
 
   remove () {
@@ -81,22 +85,30 @@ class Task {
 }
 
 class Board {
-  constructor ({ id, project, name, nextId = 0, tasks = [] }) {
+  constructor ({ id, projectId, name, nextId = 0, tasks = [] }) {
     this.id = id
-    this.project = project
+    this.projectId = projectId
     this.name = name
     this.nextId = nextId
     this.tasks = tasks
   }
 
   createTask (properties) {
-    properties.id = "task" + this.nextId
-    properties.board = this
+    properties.id = "task" + projects.nextTaskId
+    projects.nextTaskId += 1
+
+    properties.boardId = this.id
     const newTask = new Task(properties)
+
     this[newTask.id] = newTask
     this.tasks.push(newTask)
-    this.nextId += 1
+    projects.register[newTask.id] = newTask
+
     return newTask
+  }
+
+  get project () {
+    return projects.search(this.projectId)
   }
 
   deleteTask (id) {
@@ -132,10 +144,17 @@ class Project {
   }
 
   createBoard (name) {
-    const newBoard = new Board({ name: name, id: "board" + this.nextId, project: this })
+    const newBoard = new Board({
+      name: name,
+      id: "board" + projects.nextBoardId,
+      projectId: this.id
+    })
+    projects.nextBoardId += 1
+
     this[newBoard.id] = newBoard
     this.boards.push(newBoard)
-    this.nextId += 1
+    projects.register[newBoard.id] = newBoard
+
     return newBoard
   }
 
@@ -157,21 +176,37 @@ class Project {
 }
 
 class ToDo {
-  constructor ({ list = [], nextId = 0 }) {
+  constructor ({
+    list = [],
+    register = [],
+    nextTaskId = 0,
+    nextBoardId = 0,
+    nextProjectId = 0
+  }) {
     this.list = list
-    this.nextId = nextId
+    this.register = register
+    this.nextTaskId = nextTaskId
+    this.nextBoardId = nextBoardId
+    this.nextProjectId = nextProjectId
   }
 
   createProject (name) {
     const newProject = new Project({
       name: name,
-      id: "project" + this.nextId,
+      id: "project" + projects.nextProjectId,
       controller: this
     })
+    projects.nextProjectId += 1
+
     this.list.push(newProject)
     this[newProject.id] = newProject
-    this.nextId += 1
+    projects.register[newProject.id] = newProject
+
     return newProject
+  }
+
+  search (id) {
+    return this.register[id]
   }
 
   save () {
