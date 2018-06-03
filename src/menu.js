@@ -47,7 +47,7 @@ const composeMenu = projects => {
   ]
   const projectElements = composeProjects(projects)
 
-  appendChildren(menu, [controlLabel, controlList, projectLabel, projectList])
+  appendChildren(menu, [projectLabel, projectList, controlLabel, controlList])
   appendChildren(controlList, controlElements)
   appendChildren(projectList, projectElements)
 
