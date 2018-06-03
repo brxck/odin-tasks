@@ -3,14 +3,22 @@ import seed from "./seed"
 const Dry = require("json-dry")
 
 class Task {
-  constructor (id, { name, description = "", dueDate, priority }) {
+  constructor ({
+    id,
+    board,
+    name,
+    description = "",
+    dueDate,
+    priority,
+    completed = false
+  }) {
     this.id = id
-    this.board = this
+    this.board = board
     this.name = name
     this.description = description
     this.dueDate = dueDate
     this.priority = priority
-    this.completed = false
+    this.completed = completed
   }
 
   remove () {
@@ -68,21 +76,23 @@ class Task {
   }
 
   static unDry (value) {
-    return new Task(value.id, value)
+    return new Task(value)
   }
 }
 
 class Board {
-  constructor (id, name, value = {}) {
+  constructor ({ id, project, name, nextId = 0, tasks = [] }) {
     this.id = id
-    this.project = value.project || this
+    this.project = project
     this.name = name
-    this.nextId = value.nextId || 0
-    this.tasks = value.tasks || []
+    this.nextId = nextId
+    this.tasks = tasks
   }
 
   createTask (properties) {
-    const newTask = new Task("task" + this.nextId, properties)
+    properties.id = "task" + this.nextId
+    properties.board = this
+    const newTask = new Task(properties)
     this[newTask.id] = newTask
     this.tasks.push(newTask)
     this.nextId += 1
@@ -106,22 +116,22 @@ class Board {
   }
 
   static unDry (value) {
-    const board = new Board(value.id, value.name, value)
-    Object.assign(board, value.tasks)
+    const board = new Board(value)
+    makeProperties(board, value.tasks)
     return board
   }
 }
 
 class Project {
-  constructor (id, name, value = {}) {
+  constructor ({ id, name, nextId = 0, boards = [] }) {
     this.id = id
     this.name = name
-    this.boards = value.boards || []
-    this.nextId = value.nextIdea || 0
+    this.nextId = nextId
+    this.boards = boards
   }
 
-  createBoard (properties) {
-    const newBoard = new Board("board" + this.nextId, properties)
+  createBoard (name) {
+    const newBoard = new Board({ name: name, id: "board" + this.nextId, project: this })
     this[newBoard.id] = newBoard
     this.boards.push(newBoard)
     this.nextId += 1
@@ -133,20 +143,20 @@ class Project {
   }
 
   static unDry (value) {
-    const project = new Project(value.id, value.name, value)
+    const project = new Project(value)
     makeProperties(project, value.boards)
     return project
   }
 }
 
 class ToDo {
-  constructor (value = {}) {
-    this.list = value.list || []
-    this.nextId = value.nextId || 0
+  constructor ({ list = [], nextId = 0 }) {
+    this.list = list
+    this.nextId = nextId
   }
 
   createProject (name) {
-    const newProject = new Project("project" + this.nextId, name)
+    const newProject = new Project({ name: name, id: "project" + this.nextId })
     this.list.push(newProject)
     this[newProject.id] = newProject
     this.nextId += 1
@@ -183,10 +193,10 @@ const saveState = localStorage.getItem("projects")
 
 if (saveState) {
   projects = Dry.parse(saveState)
-  console.log("loading", { saveState }, projects)
+  console.log("loading", projects)
 } else {
   console.log("seeding")
-  projects = new ToDo()
+  projects = new ToDo({})
   seed(projects)
 }
 
