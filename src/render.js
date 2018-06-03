@@ -14,7 +14,7 @@ let currentProject = "project0"
 
 const renderProject = (projectId = currentProject.id) => {
   projects.save()
-  console.log("setting currentProject", projects[projectId])
+
   currentProject = projects[projectId]
   renderBoards(currentProject)
 }
