@@ -117,7 +117,7 @@ class Board {
 
   static unDry (value) {
     const board = new Board(value)
-    makeProperties(board, value.tasks)
+    makeProperties(board, board.tasks)
     return board
   }
 }
@@ -144,7 +144,7 @@ class Project {
 
   static unDry (value) {
     const project = new Project(value)
-    makeProperties(project, value.boards)
+    makeProperties(project, project.boards)
     return project
   }
 }
