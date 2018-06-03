@@ -4,7 +4,6 @@ import { composeBoard } from "./boards"
 import { composeMenu, composeProjects } from "./menu"
 import projects from "./todo"
 import { makeEditable } from "./edit"
-import { createElement, appendChildren } from "./helpers"
 import fontawesome from "@fortawesome/fontawesome"
 
 const menuView = document.getElementById("menu-view")

@@ -1,4 +1,3 @@
-import projects from "./todo"
 import { createElement, appendChildren } from "./helpers"
 import { currentProject, renderProject, renderProjects } from "./render"
 
